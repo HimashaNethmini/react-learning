@@ -1,7 +1,13 @@
+import './index.css'
+import { BiArchive } from "react-icons/bi";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Hi</h1>
+    <div className="App container mx-auto mt-3 font-semibold">
+      <h1 className='text-5xl'>
+        <BiArchive className='inline-block text-blue-800 align-top'/>
+          Your Appointment
+      </h1> 
     </div>
   );
 }
