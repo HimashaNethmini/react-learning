@@ -1,6 +1,6 @@
 import { BiTrash } from "react-icons/bi"
 
-const AppointmentInfo = ({data}) => {
+const AppointmentInfo = ({appointment}) => {
     return(
         <li className="px-3 py-3 flex items-start">
             <button type="button" className="p-1.5 mr-1.5 mt-1 rounded text-white bg-red-500
@@ -10,17 +10,17 @@ const AppointmentInfo = ({data}) => {
             <div className="flex-grow">
                 <div className="flex items-center">
                     <span className="flex-none font-medium text-2xl text-blue-500">
-                        {data.petName}
+                        {appointment.petName}
                     </span>
                     <span className="flex-grow text-right">
-                        {data.aptDate}
+                        {appointment.aptDate}
                     </span>
                 </div>
                 <div>
                     <b className="font-bold text-blue-500">Owner : </b>
-                        {data.ownerName}
+                        {appointment.ownerName}
                 </div>
-                <div className="leading-tight">{data.aptNotes}</div>
+                <div className="leading-tight">{appointment.aptNotes}</div>
             </div> 
         </li>
     )

@@ -3,22 +3,23 @@ import { BiArchive } from "react-icons/bi";
 import Search from "./components/Search";
 import AddAppointment from "./components/AddAppointment";
 import AppointmentInfo from "./components/AppointmentInfo";
-import { useCallback, useState, useEffect } from "react";
+import appointmentList from "./data.json";
+// import { useCallback, useState, useEffect } from "react";
 
 function App() {
-  let [appointmentList, setAppointmentList] = useState([]);
+  // let [appointmentList, setAppointmentList] = useState([]);
 
-  const fetchData = useCallback(() => {
-    fetch("./data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setAppointmentList(data);
-      });
-  }, []);
+  // const fetchData = useCallback(() => {
+  //   fetch("./data.json")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setAppointmentList(data);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [fetchData]);
 
   return (
     <div className="App container mx-auto mt-3 font-semibold">
@@ -32,8 +33,9 @@ function App() {
       {/* mapping the data json file */}
       <ul className="divide-y divide-gray-200">
         {appointmentList
-          .map(data => (
-          <AppointmentInfo key={data.id} data={data} />
+          .map(appointment => (
+          <AppointmentInfo key={appointment.id} 
+          appointment={appointment} />
         ))}
       </ul>
     </div>
