@@ -6,7 +6,7 @@ import AddAppointment from "./components/AddAppointment";
 import AppointmentInfo from "./components/AppointmentInfo";
 
 function App() {
-  //getting data from data.json file with UseEffect 
+  //getting data from data.json file with UseEffect
   let [appointmentList, setAppointmentList] = useState([]);
 
   const fetchData = useCallback(() => {
@@ -32,10 +32,19 @@ function App() {
 
       {/* mapping the data json file */}
       <ul className="divide-y divide-gray-200">
-        {appointmentList
-          .map(appointment => (
-          <AppointmentInfo key={appointment.id} 
-          appointment={appointment} />
+        {appointmentList.map((appointment) => (
+          <AppointmentInfo
+            key={appointment.id}
+            appointment={appointment}
+            onDeleteAppointment={
+              appointmentId => /*delete the appointment */
+              setAppointmentList(
+                appointmentList.filter(
+                  (appointment) => appointment.id === appointmentId
+                )
+              )
+            }
+          />
         ))}
       </ul>
     </div>
