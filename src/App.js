@@ -8,6 +8,16 @@ import AppointmentInfo from "./components/AppointmentInfo";
 function App() {
   //getting data from data.json file with UseEffect
   let [appointmentList, setAppointmentList] = useState([]);
+  let [query, setQuery] = useState("");
+
+  const filteredAppointments = appointmentList.filter((item) => {
+    return (
+      item.petName.toLowerCase().includes(query.toLowerCase()) ||
+      item.ownerName.toLowerCase().includes(query.toLowerCase()) ||
+      item.aptNotes.toLowerCase().includes(query.toLowerCase()) ||
+      item.aptDate.toLowerCase().includes(query.toLowerCase())
+    );
+  });
 
   const fetchData = useCallback(() => {
     fetch("./data.json")
@@ -28,16 +38,16 @@ function App() {
         Appointment{" "}
       </h1>
       <AddAppointment />
-      <Search />
+      <Search query={query} onQueryChange={(myQueery) => setQuery(myQueery)} />
 
       {/* mapping the data json file */}
       <ul className="divide-y divide-gray-200">
-        {appointmentList.map((appointment) => (
+        {filteredAppointments
+          .map((appointment) => (
           <AppointmentInfo
             key={appointment.id}
             appointment={appointment}
-            onDeleteAppointment={
-              appointmentId => /*delete the appointment */
+            onDeleteAppointment={(appointmentId /*delete the appointment */) =>
               setAppointmentList(
                 appointmentList.filter(
                   (appointment) => appointment.id === appointmentId
