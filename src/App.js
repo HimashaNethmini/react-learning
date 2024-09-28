@@ -14,22 +14,23 @@ function App() {
   let [sortBy, setSortBy] = useState("petName");
   let [orderBy, setOrderBy] = useState("asc");
 
-  const filteredAppointments = appointmentList.filter((item) => {
-    return (
-      item.petName.toLowerCase().includes(query.toLowerCase()) ||
-      item.ownerName.toLowerCase().includes(query.toLowerCase()) ||
-      item.aptNotes.toLowerCase().includes(query.toLowerCase()) ||
-      item.aptDate.toLowerCase().includes(query.toLowerCase())
-    );
-  } //implementating sorting algorithm
-).sort ((a,b) => {
-  let order = (orderBy === 'asc') ? 1 : -1;
-  return (
-    a[sortBy].toLowerCase() < b [sortBy].toLowerCase()
-      ? -1 * order : 1 * order
-  )
-
-})
+  const filteredAppointments = appointmentList
+    .filter(
+      (item) => {
+        return (
+          item.petName.toLowerCase().includes(query.toLowerCase()) ||
+          item.ownerName.toLowerCase().includes(query.toLowerCase()) ||
+          item.aptNotes.toLowerCase().includes(query.toLowerCase()) ||
+          item.aptDate.toLowerCase().includes(query.toLowerCase())
+        );
+      } //implementating sorting algorithm
+    )
+    .sort((a, b) => {
+      let order = orderBy === "asc" ? 1 : -1;
+      return a[sortBy].toLowerCase() < b[sortBy].toLowerCase()
+        ? -1 * order
+        : 1 * order;
+    });
 
   const fetchData = useCallback(() => {
     fetch("./data.json")
@@ -50,12 +51,18 @@ function App() {
         Appointment{" "}
       </h1>
       <AddAppointment />
-      <Search query={query} onQueryChange={(myQueery) => setQuery(myQueery)} />
+      <Search 
+        query={query} 
+        onQueryChange={(myQueery) => setQuery(myQueery)}
+        orderBy={orderBy}
+        onOrderByChange  = {mySort => setOrderBy (mySort)}
+        sortBy={sortBy}
+        onSortByChange = {mySort => setSortBy(mySort)} 
+      />
 
       {/* mapping the data json file */}
       <ul className="divide-y divide-gray-200">
-        {filteredAppointments
-          .map((appointment) => (
+        {filteredAppointments.map((appointment) => (
           <AppointmentInfo
             key={appointment.id}
             appointment={appointment}
