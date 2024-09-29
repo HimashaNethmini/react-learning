@@ -5,6 +5,18 @@ const AddAppointment = () => {
 
   // when the user clicks on the button, it shows the form
   const [toggleForm, setToggleForm] = useState(false)
+
+  //create appointment
+  const clearData = {
+    ownerName: '',
+    petName: '',
+    aptDate: '',
+    aptTime: '',
+    aptNotes: ''
+
+  }
+
+  let [formData, setFormData ] = useState(clearData)
   return (
     <div>
       <button onClick={() => { setToggleForm (!toggleForm) }}
